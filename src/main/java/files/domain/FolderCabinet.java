@@ -6,12 +6,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 /*
-    * NOTE: In the exercise description, the FolderCabinet is mentioned but the class name in the listing is 'FileCabinet'
+    * NOTE: In the description, there is inconsistency in the naming between 'FileCabinet' and 'FolderCabinet'.
+    * 'FolderCabinet' suits better to the naming convention of the current use case
  */
-class FileCabinet implements Cabinet {
+class FolderCabinet implements Cabinet {
     private final List<Folder> folders;
 
-    public FileCabinet(List<Folder> folders) {
+    public FolderCabinet(List<Folder> folders) {
         this.folders = folders;
     }
 

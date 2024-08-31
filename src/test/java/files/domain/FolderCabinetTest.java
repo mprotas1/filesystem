@@ -9,7 +9,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class FileCabinetTest {
+class FolderCabinetTest {
     private Cabinet fileCabinet;
 
     @BeforeEach
@@ -28,7 +28,7 @@ class FileCabinetTest {
 
 
         List<Folder> folders = List.of(firstFolder, secondFolder, parentFolder);
-        fileCabinet = new FileCabinet(folders);
+        fileCabinet = new FolderCabinet(folders);
     }
 
     @Test
