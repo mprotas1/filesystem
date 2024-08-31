@@ -2,7 +2,7 @@ package files.domain;
 
 import java.util.Objects;
 
-public record BasicFolder(String name, FolderSize size) implements Folder {
+record BasicFolder(String name, FolderSize size) implements Folder {
 
     @Override
     public String getName() {

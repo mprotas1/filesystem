@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public record FolderContainer(String name,
+record FolderContainer(String name,
                               FolderSize size,
                               List<Folder> children) implements MultiFolder {
 
