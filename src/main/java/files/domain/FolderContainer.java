@@ -1,5 +1,6 @@
 package files.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public record FolderContainer(String name,
 
     @Override
     public List<Folder> getFolders() {
-        return children;
+        return findRecursively(this.children, new ArrayList<>());
     }
 
     @Override
@@ -25,6 +26,20 @@ public record FolderContainer(String name,
     @Override
     public boolean isSize(FolderSize size) {
         return Objects.equals(this.size, size);
+    }
+    private List<Folder> findRecursively(List<Folder> folders, List<Folder> collected) {
+        for(Folder folder : folders) {
+            if(folder instanceof MultiFolder) {
+                processMultiFolder(collected, (MultiFolder) folder);
+            }
+            collected.add(folder);
+        }
+
+        return collected;
+    }
+
+    private void processMultiFolder(List<Folder> collected, MultiFolder folder) {
+        collected.addAll(folder.getFolders());
     }
 
 }

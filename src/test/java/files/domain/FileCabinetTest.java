@@ -14,13 +14,19 @@ class FileCabinetTest {
 
     @BeforeEach
     void setUp() {
+
         Folder firstFolder = FolderFactory.basic("First folder", FolderSize.SMALL);
         Folder secondFolder = FolderFactory.basic("Second folder", FolderSize.MEDIUM);
+
+        // 2nd floor of folders
+        Folder secondFloorChild = FolderFactory.basic("Second floor child", FolderSize.SMALL);
+        Folder secondFloorParent = FolderFactory.multiFolder("Second floor parent", FolderSize.LARGE, List.of(secondFloorChild));
 
         // Create a multi-folder
         Folder firstChild = FolderFactory.basic("First child", FolderSize.SMALL);
         Folder secondChild = FolderFactory.basic("Second child", FolderSize.MEDIUM);
-        Folder parentFolder = FolderFactory.multiFolder("Parent folder", FolderSize.LARGE, List.of(firstChild, secondChild));
+        Folder parentFolder = FolderFactory.multiFolder("Parent folder", FolderSize.LARGE, List.of(firstChild, secondChild, secondFloorParent));
+
 
         List<Folder> folders = List.of(firstFolder, secondFolder, parentFolder);
         fileCabinet = new FileCabinet(folders);
@@ -44,12 +50,12 @@ class FileCabinetTest {
     void shouldFindAllFoldersBySize() {
         FolderSize size = FolderSize.SMALL;
         List<Folder> foldersBySize = fileCabinet.findFoldersBySize(size);
-        assertEquals(2, foldersBySize.size());
+        assertEquals(3, foldersBySize.size());
     }
 
     @Test
     void shouldCountAllFolders() {
-        assertEquals(5, fileCabinet.count());
+        assertEquals(7, fileCabinet.count());
     }
 
 }

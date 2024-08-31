@@ -1,5 +1,6 @@
 package files.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -9,11 +10,9 @@ import java.util.Optional;
  */
 class FileCabinet implements Cabinet {
     private final List<Folder> folders;
-    private final MultiFolderedCollector folderedCollector;
 
     public FileCabinet(List<Folder> folders) {
         this.folders = folders;
-        this.folderedCollector = new MultiFolderedCollector();
     }
 
     @Override
@@ -36,7 +35,15 @@ class FileCabinet implements Cabinet {
     }
 
     private List<Folder> getAllFolders() {
-        return folderedCollector.findAll(folders);
+        List<Folder> result = new ArrayList<>();
+        for(Folder folder : folders) {
+            result.add(folder);
+            if(folder instanceof MultiFolder) {
+                result.addAll(((MultiFolder) folder).getFolders());
+            }
+        }
+
+        return result;
     }
 
 }
