@@ -14,7 +14,6 @@ class FileCabinetTest {
 
     @BeforeEach
     void setUp() {
-
         Folder firstFolder = FolderFactory.basic("First folder", FolderSize.SMALL);
         Folder secondFolder = FolderFactory.basic("Second folder", FolderSize.MEDIUM);
 

@@ -36,14 +36,19 @@ class FileCabinet implements Cabinet {
 
     private List<Folder> getAllFolders() {
         List<Folder> result = new ArrayList<>();
+
         for(Folder folder : folders) {
             result.add(folder);
-            if(folder instanceof MultiFolder) {
-                result.addAll(((MultiFolder) folder).getFolders());
-            }
+            handleMultiFolder(folder, result);
         }
 
         return result;
+    }
+
+    private void handleMultiFolder(Folder folder, List<Folder> result) {
+        if(folder instanceof MultiFolder) {
+            result.addAll(((MultiFolder) folder).getFolders());
+        }
     }
 
 }

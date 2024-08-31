@@ -10,7 +10,7 @@ public record FolderContainer(String name,
 
     @Override
     public List<Folder> getFolders() {
-        return findRecursively(this.children, new ArrayList<>());
+        return findRecursively(new ArrayList<>());
     }
 
     @Override
@@ -27,8 +27,9 @@ public record FolderContainer(String name,
     public boolean isSize(FolderSize size) {
         return Objects.equals(this.size, size);
     }
-    private List<Folder> findRecursively(List<Folder> folders, List<Folder> collected) {
-        for(Folder folder : folders) {
+
+    private List<Folder> findRecursively(List<Folder> collected) {
+        for(Folder folder : this.children) {
             if(folder instanceof MultiFolder) {
                 processMultiFolder(collected, (MultiFolder) folder);
             }
